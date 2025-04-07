@@ -15,7 +15,6 @@
 # limitations under the License.
 
 import logging
-import random
 import sys
 from typing import Any, Dict
 
@@ -37,6 +36,7 @@ from alignment import (
     get_tokenizer,
 )
 from trl import ORPOConfig, ORPOTrainer, setup_chat_format
+import secrets
 
 
 logger = logging.getLogger(__name__)
@@ -193,7 +193,7 @@ def main():
         )
 
     # Log a few random samples from the training set:
-    for index in random.sample(range(len(raw_datasets["train"])), 3):
+    for index in secrets.SystemRandom().sample(range(len(raw_datasets["train"])), 3):
         logger.info(f"Prompt sample {index} of the raw training set:\n\n{raw_datasets['train'][index]['prompt']}")
         logger.info(f"Chosen sample {index} of the raw training set:\n\n{raw_datasets['train'][index]['chosen']}")
         logger.info(f"Rejected sample {index} of the raw training set:\n\n{raw_datasets['train'][index]['rejected']}")
